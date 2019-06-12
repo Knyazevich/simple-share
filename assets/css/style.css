@@ -1,0 +1,60 @@
+.webzp-share-block {
+  position: fixed;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 999;
+}
+
+.webzp-share-block__list {
+  padding-left: 0;
+}
+
+.webzp-share-block__list-item {
+  list-style-type: none;
+}
+
+.webzp-share-block__link {
+  width: 20px;
+  height: 20px;
+  background-color: tomato;
+  display: block;
+  margin: 3px 0;
+  border-radius: 3px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 70%;
+}
+
+.webzp-share-block__link--fb {
+  background-image: url('../icons/fb.svg');
+  background-color: #45639e;
+  background-size: 50%;
+  background-position: 3.5px 4px;
+}
+
+.webzp-share-block__link--twi {
+  background-image: url('../icons/twi.svg');
+  background-color: #23b9eb;
+}
+
+.webzp-share-block__link--wa {
+  background-image: url('../icons/wa.svg');
+  background-color: #5edb57;
+}
+
+.webzp-share-block__link--tg {
+  background-image: url('../icons/tg.svg');
+  background-color: #0088cc;
+}
+
+.webzp-share-block__link--viber {
+  background-image: url('../icons/viber.svg');
+  background-color: #9147ab;
+  background-size: 80%;
+}
+
+.webzp-share-block__link--mail {
+  background-image: url('../icons/mail.svg');
+  background-color: #3b5bd1;
+}

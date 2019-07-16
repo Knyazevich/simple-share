@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Simple share\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-12 07:09+0000\n"
+"POT-Creation-Date: 2019-07-13 20:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -15,36 +15,56 @@ msgstr ""
 "X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.3.0; wp-5.2.1"
 
-#. Author URI of the plugin
-msgid "https://github.com/Knyazevich"
-msgstr ""
-
-#. Author of the plugin
-msgid "Pavlo Knyazevich"
-msgstr ""
-
-#: webzp-share-plugin.php:144 webzp-share-plugin.php:145
-msgid "Send link in an Email"
-msgstr ""
-
-#: webzp-share-plugin.php:97 webzp-share-plugin.php:98
+#: webzp-share.php:137 webzp-share.php:138
 msgid "Share on Facebook"
 msgstr ""
 
-#: webzp-share-plugin.php:127 webzp-share-plugin.php:128
-msgid "Share on Telegram"
-msgstr ""
-
-#: webzp-share-plugin.php:107 webzp-share-plugin.php:108
+#: webzp-share.php:147 webzp-share.php:148
 msgid "Share on Twitter"
 msgstr ""
 
-#: webzp-share-plugin.php:137 webzp-share-plugin.php:138
+#: webzp-share.php:157 webzp-share.php:158
+msgid "Share on WhatsApp"
+msgstr ""
+
+#: webzp-share.php:167 webzp-share.php:168
+msgid "Share on Telegram"
+msgstr ""
+
+#: webzp-share.php:177 webzp-share.php:178
 msgid "Share on Viber"
 msgstr ""
 
-#: webzp-share-plugin.php:117 webzp-share-plugin.php:118
-msgid "Share on WhatsApp"
+#: webzp-share.php:184 webzp-share.php:185
+msgid "Send link in an Email"
+msgstr ""
+
+#: webzp-share.php:225
+msgid "Main settings"
+msgstr ""
+
+#: webzp-share.php:232
+msgid "Show social buttons"
+msgstr ""
+
+#: webzp-share.php:240
+msgid "Show horizontal block on mobile"
+msgstr ""
+
+#: webzp-share.php:248
+msgid "Show shares counter"
+msgstr ""
+
+#: webzp-share.php:256
+msgid "Edit shares counter"
+msgstr ""
+
+#: webzp-share.php:385
+msgid "Counter successfully increased"
+msgstr ""
+
+#: webzp-share.php:387
+msgid "Increasing error"
 msgstr ""
 
 #. Name of the plugin
@@ -53,4 +73,16 @@ msgstr ""
 
 #. Description of the plugin
 msgid "Simple share current page plugin"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://github.com/Knyazevich/simple-share"
+msgstr ""
+
+#. Author of the plugin
+msgid "Pavlo Knyazevich"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://github.com/Knyazevich"
 msgstr ""

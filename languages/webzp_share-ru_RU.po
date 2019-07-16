@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Simple share\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-12 07:09+0000\n"
-"PO-Revision-Date: 2019-06-12 07:12+0000\n"
-"Last-Translator: Admin <valeriazhalis@gmail.com>\n"
+"POT-Creation-Date: 2019-07-13 20:26+0000\n"
+"PO-Revision-Date: 2019-07-13 20:27+0000\n"
+"Last-Translator: root <psknyazevich@gmail.com>\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
@@ -13,39 +13,61 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.3.0; wp-5.2.1"
+"X-Loco-Version: 2.3.0; wp-5.2.2"
 
-#. Author URI of the plugin
-msgid "https://github.com/Knyazevich"
-msgstr "https://github.com/Knyazevich"
-
-#. Author of the plugin
-msgid "Pavlo Knyazevich"
-msgstr "Паша Князевич"
-
-#: webzp-share-plugin.php:144 webzp-share-plugin.php:145
-msgid "Send link in an Email"
-msgstr "Отправить ссылку по Email"
-
-#: webzp-share-plugin.php:97 webzp-share-plugin.php:98
+#: webzp-share.php:137 webzp-share.php:138
 msgid "Share on Facebook"
 msgstr "Поделиться в Facebook"
 
-#: webzp-share-plugin.php:127 webzp-share-plugin.php:128
-msgid "Share on Telegram"
-msgstr "Поделиться в Telegram"
-
-#: webzp-share-plugin.php:107 webzp-share-plugin.php:108
+#: webzp-share.php:147 webzp-share.php:148
 msgid "Share on Twitter"
 msgstr "Поделиться в Twitter"
 
-#: webzp-share-plugin.php:137 webzp-share-plugin.php:138
+#: webzp-share.php:157 webzp-share.php:158
+msgid "Share on WhatsApp"
+msgstr "Поделиться в WhatsApp"
+
+#: webzp-share.php:167 webzp-share.php:168
+msgid "Share on Telegram"
+msgstr "Поделиться в Telegram"
+
+#: webzp-share.php:177 webzp-share.php:178
 msgid "Share on Viber"
 msgstr "Поделиться в Viber"
 
-#: webzp-share-plugin.php:117 webzp-share-plugin.php:118
-msgid "Share on WhatsApp"
-msgstr "Поделиться в WhatsApp"
+#: webzp-share.php:184 webzp-share.php:185
+msgid "Send link in an Email"
+msgstr "Отправить ссылку по Email"
+
+#: webzp-share.php:225
+msgid "Main settings"
+msgstr "Основные настройки"
+
+#: webzp-share.php:232
+msgid "Show social buttons"
+msgstr "Показать социальные кнопки"
+
+#: webzp-share.php:240
+msgid "Show horizontal block on mobile"
+msgstr ""
+"Показывать горизонтальный блок иконок на мобильном вместо стандартного "
+"отображения"
+
+#: webzp-share.php:248
+msgid "Show shares counter"
+msgstr "Показывать счетчик"
+
+#: webzp-share.php:256
+msgid "Edit shares counter"
+msgstr "Редактировать счетчик"
+
+#: webzp-share.php:385
+msgid "Counter successfully increased"
+msgstr "Счетчик успешно увеличен"
+
+#: webzp-share.php:387
+msgid "Increasing error"
+msgstr "Ошибка увеличения счетчика"
 
 #. Name of the plugin
 msgid "Simple share"
@@ -56,3 +78,15 @@ msgid "Simple share current page plugin"
 msgstr ""
 "Легковесный плагин, позволяющий поделиться текущей страницей в некоторых "
 "социальных сетях."
+
+#. URI of the plugin
+msgid "https://github.com/Knyazevich/simple-share"
+msgstr "https://github.com/Knyazevich/simple-share"
+
+#. Author of the plugin
+msgid "Pavlo Knyazevich"
+msgstr "Паша Князевич"
+
+#. Author URI of the plugin
+msgid "https://github.com/Knyazevich"
+msgstr "https://github.com/Knyazevich"

@@ -7,16 +7,19 @@
  * Domain Path: /languages
  * Author URI:  https://github.com/Knyazevich
  * Author:      Pavlo Knyazevich
- * Version:     1.0.0
+ * Version:     1.0.4
  *
  * License:     GPL2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
 
 if ( ! defined( 'WEBZP_SHARE_VER' ) ) {
-  define( 'WEBZP_SHARE_VER', '1.0.0' );
+  define( 'WEBZP_SHARE_VER', '1.0.4' );
 }
 
+/**
+ * Class Webzp_Share
+ */
 class Webzp_Share {
 
   /**
@@ -31,18 +34,29 @@ class Webzp_Share {
    * @return void
    */
   private function __construct() {
+    $is_enabled = get_option( 'webzp_share_settings' )['enabled'];
+
+    if ( $is_enabled ) {
+      add_action( 'wp_enqueue_scripts', array( $this, 'front_scripts' ), 10 );
+      add_action( 'wp_footer', array( $this, 'render_share_buttons' ) );
+    }
+
     add_action( 'plugins_loaded', array( $this, 'textdomain' ) );
-    add_action( 'wp_enqueue_scripts', array( $this, 'front_scripts' ), 10 );
-    add_action( 'wp_footer', array( $this, 'render_share_buttons' ) );
+    add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
+    add_action( 'admin_init', array( $this, 'settings_init' ) );
+
+    register_activation_hook( __FILE__, array( $this, 'add_basic_options' ) );
+
+    add_action( 'wp_ajax_nopriv_webzp_share_shared', array( $this, 'ajax_share_handler' ) );
+    add_action( 'wp_ajax_webzp_share_shared', array( $this, 'ajax_share_handler' ) );
   }
 
   /**
-   * If an instance exists, this returns it.  If not, it creates one and
+   * If an instance exists, this returns it. If not, it creates one and
    * retuns it.
    *
    * @return Webzp_Share
    */
-
   public static function getInstance() {
 
     if ( ! self::$instance ) {
@@ -58,9 +72,12 @@ class Webzp_Share {
    *
    * @return void
    */
-
   public function textdomain() {
-    load_plugin_textdomain( 'webzp_share', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+    load_plugin_textdomain(
+      'webzp_share',
+      false,
+      dirname( plugin_basename( __FILE__ ) ) . '/languages/'
+    );
   }
 
   /**
@@ -71,8 +88,21 @@ class Webzp_Share {
 
   public function front_scripts() {
 
-    wp_enqueue_style( 'webzp_share_styles', plugins_url( 'assets/css/style.css', __FILE__ ), array(), WEBZP_SHARE_VER, 'all' );
-    wp_enqueue_script( 'webzp_share_common', plugins_url( 'assets/js/common.js', __FILE__ ), array(), WEBZP_SHARE_VER, true );
+    wp_enqueue_style(
+      'webzp_share_styles',
+      plugins_url( 'assets/css/style.css', __FILE__ ),
+      array(),
+      WEBZP_SHARE_VER,
+      'all'
+    );
+
+    wp_enqueue_script(
+      'webzp_share_common',
+      plugins_url( 'assets/js/common.js', __FILE__ ),
+      array(),
+      WEBZP_SHARE_VER,
+      true
+    );
 
   }
 
@@ -81,18 +111,27 @@ class Webzp_Share {
    *
    * @return void
    */
-
   public function render_share_buttons() {
     global $wp;
-    $url = home_url( add_query_arg( array(), $wp->request ) );
-    $title = get_the_title();
+    $url = esc_url( home_url( add_query_arg( array(), $wp->request ) ) );
+    $title = esc_html( get_the_title() );
+
+    $options = get_option( 'webzp_share_settings' );
+    $is_horizontal = $options['horizontal'];
+    $enable_counter = $options['enable_counter'];
+    $shares_count = esc_html( $options['shares_count'] );
   ?>
 
-  <nav class="webzp-share-block">
+  <nav class="
+    webzp-share-block 
+    <?php if ( $is_horizontal ) { ?>
+    webzp-share-block--mobile-horizontal
+    <?php } ?>
+  ">
     <ul class="webzp-share-block__list">
 
       <li class="webzp-share-block__list-item">
-        <a href="http://www.facebook.com/sharer.php?u=<?php echo $url; ?>/?_wsp_t=fb"
+        <a href="https://www.facebook.com/sharer.php?u=<?php echo $url; ?>/?_wsp_t=fb"
            target="_blank"
            data-popup="true"
            title="<?php _e( 'Share on Facebook', 'webzp_share' ); ?>"
@@ -149,9 +188,207 @@ class Webzp_Share {
       </li>
 
     </ul>
+
+    <?php if ( $enable_counter ) { ?>
+
+    <div class="webzp-share-shares-tooltip">
+        <span class="webzp-share-shares-tooltip-content"><?php echo $shares_count; ?></span>
+    </div>
+
+    <?php } ?>
   </nav>
-  
+
   <?php
+  }
+
+  /**
+   * Idd separate settings page
+   *
+   * @return void
+   */
+
+  public function add_admin_menu() { 
+    add_menu_page( 'Simple share', 'Simple share', 'manage_options', 'simple_share', array( $this, 'options_page' ) );
+  }
+
+  /**
+   * Register settings section and checkboxes
+   *
+   * @return void
+   */
+
+  public function settings_init() {
+    register_setting( 'pluginPage', 'webzp_share_settings' );
+
+    add_settings_section(
+      'webzp_share_pluginPage_section', 
+      __( 'Main settings', 'webzp_share' ), 
+      '',
+      'pluginPage'
+    );
+
+    add_settings_field( 
+      'webzp_share_checkbox_field_0', 
+      __( 'Show social buttons', 'webzp_share' ),
+      array( $this, 'checkbox_enable_plugin_render' ),
+      'pluginPage', 
+      'webzp_share_pluginPage_section' 
+    );
+
+    add_settings_field( 
+      'webzp_share_checkbox_field_1', 
+      __( 'Show horizontal block on mobile', 'webzp_share' ),
+      array( $this, 'checkbox_mobile_horizontal_render' ),
+      'pluginPage', 
+      'webzp_share_pluginPage_section' 
+    );
+
+    add_settings_field(
+      'webzp_share_shares_counter',
+      __( 'Show shares counter', 'webzp_share' ),
+      array( $this, 'checkbox_shares_counter_render' ),
+      'pluginPage',
+      'webzp_share_pluginPage_section'
+    );
+
+    add_settings_field(
+      'webzp_share_shares_quantity',
+      __( 'Edit shares counter', 'webzp_share' ),
+      array( $this, 'text_shares_quantity_render' ),
+      'pluginPage',
+      'webzp_share_pluginPage_section'
+    );
+  }
+
+  /**
+   * Setup enabling / disabling checkbox
+   *
+   * @return void
+   */
+
+  public function checkbox_enable_plugin_render() {
+    $options = get_option( 'webzp_share_settings' );
+    ?>
+
+    <input type="checkbox"
+           name="webzp_share_settings[enabled]"
+           <?php checked( $options['enabled'] ); ?>
+           value="1">
+
+    <?php
+  }
+
+  /**
+   * Setup "enable horizontal mode" checkbox
+   *
+   * @return void
+   */
+  public function checkbox_mobile_horizontal_render() {
+    $options = get_option( 'webzp_share_settings' );
+    ?>
+
+    <input type="checkbox"
+           name="webzp_share_settings[horizontal]"
+           <?php checked( $options['horizontal'] ); ?>
+           value="1">
+
+    <?php
+  }
+
+  /**
+   * Setup "enable shares counter" checkbox
+   *
+   * @return void
+   */
+  public function checkbox_shares_counter_render() {
+    $options = get_option( 'webzp_share_settings' );
+    ?>
+
+    <input type="checkbox"
+           name="webzp_share_settings[enable_counter]"
+           <?php checked( $options['enable_counter'] ); ?>
+           value="1">
+
+    <?php
+  }
+
+  /**
+   * Setup shares quantity text input
+   *
+   * @return void
+   */
+  public function text_shares_quantity_render() {
+    $options = get_option( 'webzp_share_settings' );
+    ?>
+
+    <input type="text"
+           name="webzp_share_settings[shares_count]"
+           value="<?php echo esc_html( $options['shares_count'] ); ?>">
+
+    <?php
+  }
+
+  /**
+   * Setup full settings form
+   *
+   * @return void
+   */
+  public function options_page() {
+    ?>
+
+    <form action="options.php" method="POST">
+
+      <?php
+      settings_fields( 'pluginPage' );
+      do_settings_sections( 'pluginPage' );
+      submit_button();
+      ?>
+
+    </form>
+
+    <?php
+  }
+
+  /**
+   * Setup basic settings options on first init
+   *
+   * @return void
+   */
+  public function add_basic_options() {
+
+    $options = get_option( 'webzp_share_settings' );
+
+    if ( ! $options ) {
+        add_option( 'webzp_share_settings', array(
+          'enabled' => 1,
+          'horizontal' => 1,
+          'enable_counter' => 1,
+          'shares_count' => 0,
+        ) );
+    }
+
+  }
+
+  /**
+   * AJAX handler on page share
+   *
+   * @return void
+   */
+  public function ajax_share_handler() {
+
+    $options = get_option( 'webzp_share_settings' );
+    $options['shares_count'] += 1;
+
+    $upd_meta = update_site_option( 'webzp_share_settings', $options );
+
+    if ( $upd_meta ) {
+      wp_send_json_success( __( 'Counter successfully increased', 'webzp_share' ) );
+    } else {
+      wp_send_json_error( __( 'Increasing error', 'webzp_share' ) );
+    }
+
+    die();
+
   }
 
 }

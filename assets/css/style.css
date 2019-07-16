@@ -136,7 +136,7 @@
 }
 
 /* Tooltip text */
-.webzp-share-shares-tooltip .webzp-share-shares-tooltip-content {
+.webzp-share-shares-tooltip-content {
   background-color: black;
   color: #fff;
   text-align: center;
@@ -148,7 +148,7 @@
 }
 
 /* Tooltip arrow */
-.webzp-share-shares-tooltip .webzp-share-shares-tooltip-content::after {
+.webzp-share-shares-tooltip-content::after {
   content: ' ';
   position: absolute;
   bottom: 100%;
@@ -159,7 +159,7 @@
 }
 
 @media screen and (max-width: 576px) {
-  .webzp-share-shares-tooltip {
+  .webzp-share-block--mobile-horizontal .webzp-share-shares-tooltip {
     display: none;
   }
 }

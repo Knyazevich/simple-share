@@ -7,14 +7,14 @@
  * Domain Path: /languages
  * Author URI:  https://github.com/Knyazevich
  * Author:      Pavlo Knyazevich
- * Version:     1.0.4
+ * Version:     1.0.5
  *
  * License:     GPL2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
 
 if ( ! defined( 'WEBZP_SHARE_VER' ) ) {
-  define( 'WEBZP_SHARE_VER', '1.0.4' );
+  define( 'WEBZP_SHARE_VER', '1.0.5' );
 }
 
 /**
@@ -24,7 +24,6 @@ class Webzp_Share {
 
   /**
    * Static property to hold our singleton instance
-   *
    */
   static $instance = false;
 
@@ -39,6 +38,8 @@ class Webzp_Share {
     if ( $is_enabled ) {
       add_action( 'wp_enqueue_scripts', array( $this, 'front_scripts' ), 10 );
       add_action( 'wp_footer', array( $this, 'render_share_buttons' ) );
+      add_action( 'wp_ajax_nopriv_webzp_share_shared', array( $this, 'ajax_share_handler' ) );
+      add_action( 'wp_ajax_webzp_share_shared', array( $this, 'ajax_share_handler' ) );
     }
 
     add_action( 'plugins_loaded', array( $this, 'textdomain' ) );
@@ -46,14 +47,11 @@ class Webzp_Share {
     add_action( 'admin_init', array( $this, 'settings_init' ) );
 
     register_activation_hook( __FILE__, array( $this, 'add_basic_options' ) );
-
-    add_action( 'wp_ajax_nopriv_webzp_share_shared', array( $this, 'ajax_share_handler' ) );
-    add_action( 'wp_ajax_webzp_share_shared', array( $this, 'ajax_share_handler' ) );
   }
 
   /**
    * If an instance exists, this returns it. If not, it creates one and
-   * retuns it.
+   * returns it.
    *
    * @return Webzp_Share
    */
@@ -120,14 +118,12 @@ class Webzp_Share {
     $is_horizontal = $options['horizontal'];
     $enable_counter = $options['enable_counter'];
     $shares_count = esc_html( $options['shares_count'] );
+
+    $shares_tooltip_text_color = esc_html( $options['shares_text_color'] );
+    $shares_tooltip_bg_color = esc_html( $options['shares_bg_color'] );
   ?>
 
-  <nav class="
-    webzp-share-block 
-    <?php if ( $is_horizontal ) { ?>
-    webzp-share-block--mobile-horizontal
-    <?php } ?>
-  ">
+  <nav class="webzp-share-block <?php echo $is_horizontal ? 'webzp-share-block--mobile-horizontal ' : ''; ?>">
     <ul class="webzp-share-block__list">
 
       <li class="webzp-share-block__list-item">
@@ -195,6 +191,17 @@ class Webzp_Share {
         <span class="webzp-share-shares-tooltip-content"><?php echo $shares_count; ?></span>
     </div>
 
+    <style>
+      .webzp-share-shares-tooltip-content {
+        color: <?php echo $shares_tooltip_text_color; ?> !important;
+        background-color: <?php echo $shares_tooltip_bg_color; ?> !important;
+      }
+
+      .webzp-share-shares-tooltip-content::after {
+        border-color: transparent transparent <?php echo $shares_tooltip_bg_color; ?> transparent !important;
+      }
+    </style>
+
     <?php } ?>
   </nav>
 
@@ -202,7 +209,7 @@ class Webzp_Share {
   }
 
   /**
-   * Idd separate settings page
+   * Add separate settings page
    *
    * @return void
    */
@@ -247,6 +254,22 @@ class Webzp_Share {
       'webzp_share_shares_counter',
       __( 'Show shares counter', 'webzp_share' ),
       array( $this, 'checkbox_shares_counter_render' ),
+      'pluginPage',
+      'webzp_share_pluginPage_section'
+    );
+
+    add_settings_field(
+      'webzp_share_shares_counter_text_color',
+      __( 'Shares counter text color', 'webzp_share' ),
+      array( $this, 'checkbox_shares_counter_text_color_render' ),
+      'pluginPage',
+      'webzp_share_pluginPage_section'
+    );
+
+    add_settings_field(
+      'webzp_share_shares_counter_bg_color',
+      __( 'Shares counter background color', 'webzp_share' ),
+      array( $this, 'checkbox_shares_counter_bg_color_render' ),
       'pluginPage',
       'webzp_share_pluginPage_section'
     );
@@ -329,6 +352,38 @@ class Webzp_Share {
   }
 
   /**
+   * Setup shares tooltip text color
+   *
+   * @return void
+   */
+  public function checkbox_shares_counter_text_color_render() {
+    $options = get_option( 'webzp_share_settings' );
+    ?>
+
+    <input type="color"
+           name="webzp_share_settings[shares_text_color]"
+           value="<?php echo esc_html( $options['shares_text_color'] ); ?>">
+
+    <?php
+  }
+
+  /**
+   * Setup shares tooltip background color
+   *
+   * @return void
+   */
+  public function checkbox_shares_counter_bg_color_render() {
+    $options = get_option( 'webzp_share_settings' );
+    ?>
+
+    <input type="color"
+           name="webzp_share_settings[shares_bg_color]"
+           value="<?php echo esc_html( $options['shares_bg_color'] ); ?>">
+
+    <?php
+  }
+
+  /**
    * Setup full settings form
    *
    * @return void
@@ -364,6 +419,8 @@ class Webzp_Share {
           'horizontal' => 1,
           'enable_counter' => 1,
           'shares_count' => 0,
+          'shares_text_color' => '#fff',
+          'shares_bg_color' => '#000',
         ) );
     }
 

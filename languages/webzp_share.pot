@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Simple share\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-13 20:26+0000\n"
+"POT-Creation-Date: 2019-07-16 14:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -15,55 +15,63 @@ msgstr ""
 "X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.3.0; wp-5.2.1"
 
-#: webzp-share.php:137 webzp-share.php:138
+#: webzp-share.php:134 webzp-share.php:135
 msgid "Share on Facebook"
 msgstr ""
 
-#: webzp-share.php:147 webzp-share.php:148
+#: webzp-share.php:144 webzp-share.php:145
 msgid "Share on Twitter"
 msgstr ""
 
-#: webzp-share.php:157 webzp-share.php:158
+#: webzp-share.php:154 webzp-share.php:155
 msgid "Share on WhatsApp"
 msgstr ""
 
-#: webzp-share.php:167 webzp-share.php:168
+#: webzp-share.php:164 webzp-share.php:165
 msgid "Share on Telegram"
 msgstr ""
 
-#: webzp-share.php:177 webzp-share.php:178
+#: webzp-share.php:174 webzp-share.php:175
 msgid "Share on Viber"
 msgstr ""
 
-#: webzp-share.php:184 webzp-share.php:185
+#: webzp-share.php:181 webzp-share.php:182
 msgid "Send link in an Email"
 msgstr ""
 
-#: webzp-share.php:225
+#: webzp-share.php:233
 msgid "Main settings"
 msgstr ""
 
-#: webzp-share.php:232
+#: webzp-share.php:240
 msgid "Show social buttons"
 msgstr ""
 
-#: webzp-share.php:240
+#: webzp-share.php:248
 msgid "Show horizontal block on mobile"
 msgstr ""
 
-#: webzp-share.php:248
+#: webzp-share.php:256
 msgid "Show shares counter"
 msgstr ""
 
-#: webzp-share.php:256
+#: webzp-share.php:264
+msgid "Shares counter text color"
+msgstr ""
+
+#: webzp-share.php:272
+msgid "Shares counter background color"
+msgstr ""
+
+#: webzp-share.php:280
 msgid "Edit shares counter"
 msgstr ""
 
-#: webzp-share.php:385
+#: webzp-share.php:443
 msgid "Counter successfully increased"
 msgstr ""
 
-#: webzp-share.php:387
+#: webzp-share.php:445
 msgid "Increasing error"
 msgstr ""
 

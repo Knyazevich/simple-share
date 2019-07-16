@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Simple share\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-13 20:26+0000\n"
-"PO-Revision-Date: 2019-07-13 20:28+0000\n"
+"POT-Creation-Date: 2019-07-16 14:46+0000\n"
+"PO-Revision-Date: 2019-07-16 14:48+0000\n"
 "Last-Translator: root <psknyazevich@gmail.com>\n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
@@ -15,57 +15,65 @@ msgstr ""
 "X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.3.0; wp-5.2.2"
 
-#: webzp-share.php:137 webzp-share.php:138
+#: webzp-share.php:134 webzp-share.php:135
 msgid "Share on Facebook"
 msgstr "Поділитись у Facebook"
 
-#: webzp-share.php:147 webzp-share.php:148
+#: webzp-share.php:144 webzp-share.php:145
 msgid "Share on Twitter"
 msgstr "Поділитись у Twitter"
 
-#: webzp-share.php:157 webzp-share.php:158
+#: webzp-share.php:154 webzp-share.php:155
 msgid "Share on WhatsApp"
 msgstr "Поділитись у WhatsApp"
 
-#: webzp-share.php:167 webzp-share.php:168
+#: webzp-share.php:164 webzp-share.php:165
 msgid "Share on Telegram"
 msgstr "Поділитись у Telegram"
 
-#: webzp-share.php:177 webzp-share.php:178
+#: webzp-share.php:174 webzp-share.php:175
 msgid "Share on Viber"
 msgstr "Поділитись у Viber"
 
-#: webzp-share.php:184 webzp-share.php:185
+#: webzp-share.php:181 webzp-share.php:182
 msgid "Send link in an Email"
 msgstr "Відправити посилання у Email"
 
-#: webzp-share.php:225
+#: webzp-share.php:233
 msgid "Main settings"
 msgstr "Основні налаштування"
 
-#: webzp-share.php:232
+#: webzp-share.php:240
 msgid "Show social buttons"
 msgstr "Відображати соціальні кнопки"
 
-#: webzp-share.php:240
+#: webzp-share.php:248
 msgid "Show horizontal block on mobile"
 msgstr ""
 "Показувати горизонтальний блок іконок знизу, замість стандартного "
 "відображення"
 
-#: webzp-share.php:248
+#: webzp-share.php:256
 msgid "Show shares counter"
 msgstr "Показувати лічильник поширень"
 
-#: webzp-share.php:256
+#: webzp-share.php:264
+msgid "Shares counter text color"
+msgstr "Колір тексту лічильника"
+
+#: webzp-share.php:272
+msgid "Shares counter background color"
+msgstr "Колір фону лічильника"
+
+#: webzp-share.php:280
 msgid "Edit shares counter"
 msgstr "Редагувати лічильник поширень"
 
-#: webzp-share.php:385
+#: webzp-share.php:443
 msgid "Counter successfully increased"
 msgstr "Лічильник успішно збільшено"
 
-#: webzp-share.php:387
+#: webzp-share.php:445
 msgid "Increasing error"
 msgstr "Помилка збільшення лічильника"
 
